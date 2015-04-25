@@ -38,7 +38,10 @@ func (ds *DoitServer) Listen(port *string, config *DoitConfig) (err error) {
 	r.HandleFunc("/", ds.homeHandler)
 	//templates
 	r.HandleFunc("/api/1/template/{name}", nil)
-	r.HandleFunc("/api/1/templates/{name}", nil)
+	r.HandleFunc("/api/1/templates", nil)
+	//object
+	r.HandleFunc("/api/1/object/{name}", nil)
+	r.HandleFunc("/api/1/objects", nil)
 	//domains
 	r.HandleFunc("/api/1/domain/{name}", ds.apiDomainHandler).Methods("POST", "DELETE", "PUT", "GET")
 	r.HandleFunc("/api/1/domains", ds.apiDomainsHandler).Methods("GET")
