@@ -17,7 +17,7 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 	vars := mux.Vars(r)
 	domain := r.Form.Get("domain")
 	reqName := vars["name"]
-	varName := vars["varName"]
+	//varName := vars["varName"]
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {

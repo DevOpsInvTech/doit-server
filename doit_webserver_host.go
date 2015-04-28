@@ -3,7 +3,9 @@ package main
 import (
 	"net/http"
 
+	dt "github.com/DevOpsInvTech/doittypes"
 	log "github.com/Sirupsen/logrus"
+
 	"github.com/gorilla/mux"
 )
 
@@ -48,7 +50,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		err = ds.AddHostVars(d, h.ID, &HostVar{Name: varName, Value: value, Domain: d})
+		err = ds.AddHostVars(d, h.ID, &dt.HostVar{Name: varName, Value: value, Domain: d})
 		if err != nil {
 			//TODO: What error to throw here?
 			ds.ReturnNotFound(w, r)
@@ -64,7 +66,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 		if err != nil {
 			w.WriteHeader(404)
 		}
-		err = ds.RemoveHostVars(d, h.ID, &HostVar{Name: varName, Value: value, Domain: d})
+		err = ds.RemoveHostVars(d, h.ID, &dt.HostVar{Name: varName, Value: value, Domain: d})
 		if err != nil {
 			//TODO: What error to throw here?
 			ds.ReturnNotFound(w, r)

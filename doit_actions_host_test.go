@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	dt "github.com/DevOpsInvTech/doittypes"
+)
 
 func TestDoitActionAddHost(t *testing.T) {
 	ds := &DoitServer{}
@@ -34,7 +38,7 @@ func TestDoitActionAddHostVar(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.AddHostVars(domain, newHost.ID, HostVar{Name: "Var1", Value: "Val1", Domain: domain}); err != nil {
+	if err := ds.AddHostVars(domain, newHost.ID, &dt.HostVar{Name: "Var1", Value: "Val1", Domain: domain}); err != nil {
 		t.Fatal(err)
 	}
 	checkHost, err := ds.GetHost(domain, newHost.ID)
@@ -62,7 +66,7 @@ func TestDoitActionAddHostVars(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.AddHostVars(domain, newHost.ID, []HostVar{HostVar{Name: "Var1", Value: "Val1", Host: newHost, Domain: domain}, HostVar{Name: "Var2", Value: "Val2", Host: newHost, Domain: domain}}...); err != nil {
+	if err := ds.AddHostVars(domain, newHost.ID, []*dt.HostVar{&dt.HostVar{Name: "Var1", Value: "Val1", Host: newHost, Domain: domain}, &dt.HostVar{Name: "Var2", Value: "Val2", Host: newHost, Domain: domain}}...); err != nil {
 		t.Fatal(err)
 	}
 	checkHost, err := ds.GetHost(domain, newHost.ID)
@@ -117,7 +121,7 @@ func TestDoitActionRemoveHostAndVars(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.AddHostVars(domain, h.ID, HostVar{Name: "Var1", Value: "Val1", Host: h, Domain: domain}); err != nil {
+	if err := ds.AddHostVars(domain, h.ID, &dt.HostVar{Name: "Var1", Value: "Val1", Host: h, Domain: domain}); err != nil {
 		t.Fatal(err)
 	}
 	if err := ds.RemoveHost(domain, h); err != nil {
@@ -143,13 +147,13 @@ func TestDoitActionRemoveHostVars(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.AddHostVars(domain, h.ID, HostVar{Name: "Var1", Value: "Val1", Host: h, Domain: domain}); err != nil {
+	if err := ds.AddHostVars(domain, h.ID, &dt.HostVar{Name: "Var1", Value: "Val1", Host: h, Domain: domain}); err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.RemoveHostVars(domain, h.ID, HostVar{ID: 1, Name: "Var1", Value: "Val1"}); err != nil {
+	if err := ds.RemoveHostVars(domain, h.ID, &dt.HostVar{ID: 1, Name: "Var1", Value: "Val1"}); err != nil {
 		t.Fatal(err)
 	}
-	checkHost := &Host{}
+	checkHost := &dt.Host{}
 	checkHost, err = ds.GetHost(domain, h.ID)
 	if err != nil {
 		t.Fatal("Host not found in database")

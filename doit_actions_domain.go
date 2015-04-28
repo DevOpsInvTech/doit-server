@@ -1,10 +1,10 @@
 package main
 
-import dt "github.com/DevOpsInvTech/doit-types"
+import dt "github.com/DevOpsInvTech/doittypes"
 
 //AddDomain Add Domain to datastore
 func (ds *DoitServer) AddDomain(name string) (d *dt.Domain, err error) {
-	d = &Domain{Name: name}
+	d = &dt.Domain{Name: name}
 	ds.Store.Conn.NewRecord(d)
 	gormErr := ds.Store.Conn.Create(&d)
 	return d, gormErr.Error
@@ -95,7 +95,7 @@ func (ds *DoitServer) RemoveDomain(d *dt.Domain) error {
 
 //GetDomain Get Var from datastore
 func (ds *DoitServer) GetDomain(id int) (*dt.Domain, error) {
-	d := &Domain{ID: id}
+	d := &dt.Domain{ID: id}
 	gormErr := ds.Store.Conn.First(&d)
 	if gormErr.Error != nil {
 		return nil, gormErr.Error
@@ -105,8 +105,8 @@ func (ds *DoitServer) GetDomain(id int) (*dt.Domain, error) {
 
 //GetDomainByName Get Var from datastore
 func (ds *DoitServer) GetDomainByName(name string) (*dt.Domain, error) {
-	d := &Domain{Name: name}
-	gormErr := ds.Store.Conn.Where(&Domain{Name: name}).First(&d)
+	d := &dt.Domain{Name: name}
+	gormErr := ds.Store.Conn.Where(&dt.Domain{Name: name}).First(&d)
 	if gormErr.Error != nil {
 		return nil, gormErr.Error
 	}

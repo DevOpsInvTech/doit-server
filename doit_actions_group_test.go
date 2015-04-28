@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	dt "github.com/DevOpsInvTech/doittypes"
+)
 
 func TestDoitActionAddGroup(t *testing.T) {
 	ds := &DoitServer{}
@@ -34,7 +38,7 @@ func TestDoitActionAddGroupVar(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.AddGroupVars(domain, g.ID, Var{Name: "Var1", Value: "Val1", Domain: domain}); err != nil {
+	if err := ds.AddGroupVars(domain, g.ID, dt.Var{Name: "Var1", Value: "Val1", Domain: domain}); err != nil {
 		t.Fatal(err)
 	}
 	cg, err := ds.GetGroup(domain, g.ID)
@@ -61,7 +65,7 @@ func TestDoitActionAddGroupVars(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.AddGroupVars(domain, g.ID, []Var{Var{Name: "Var1", Value: "Val1", Domain: domain}, Var{Name: "Var2", Value: "Val2", Domain: domain}}...); err != nil {
+	if err := ds.AddGroupVars(domain, g.ID, []dt.Var{dt.Var{Name: "Var1", Value: "Val1", Domain: domain}, dt.Var{Name: "Var2", Value: "Val2", Domain: domain}}...); err != nil {
 		t.Fatal(err)
 	}
 	cg, err := ds.GetGroup(domain, g.ID)
@@ -89,7 +93,7 @@ func TestDoitActionAddGroupHost(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.AddGroupHosts(domain, g.ID, Host{Name: "Host1", Domain: domain}); err != nil {
+	if err := ds.AddGroupHosts(domain, g.ID, dt.Host{Name: "Host1", Domain: domain}); err != nil {
 		t.Fatal(err)
 	}
 	cg, err := ds.GetGroup(domain, g.ID)
@@ -117,7 +121,7 @@ func TestDoitActionAddGroupHosts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ds.AddGroupHosts(domain, g.ID, []Host{Host{Name: "Host11", Domain: domain}, Host{Name: "Host2", Domain: domain}}...); err != nil {
+	if err := ds.AddGroupHosts(domain, g.ID, []dt.Host{dt.Host{Name: "Host11", Domain: domain}, dt.Host{Name: "Host2", Domain: domain}}...); err != nil {
 		t.Fatal(err)
 	}
 	cg, err := ds.GetGroup(domain, g.ID)

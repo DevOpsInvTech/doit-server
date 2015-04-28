@@ -1,6 +1,7 @@
 package main
 
 import (
+	dt "github.com/DevOpsInvTech/doittypes"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -25,12 +26,12 @@ func NewStorage(t string, loc string) (*DoitStorage, error) {
 
 func (s *DoitStorage) InitSchema(overwrite bool) {
 	if overwrite {
-		s.Conn.CreateTable(&Host{})
-		s.Conn.CreateTable(&HostVar{})
-		s.Conn.CreateTable(&Var{})
-		s.Conn.CreateTable(&Domain{})
-		s.Conn.CreateTable(&Group{})
-		s.Conn.CreateTable(&GroupMatrix{})
+		s.Conn.CreateTable(&dt.Host{})
+		s.Conn.CreateTable(&dt.HostVar{})
+		s.Conn.CreateTable(&dt.Var{})
+		s.Conn.CreateTable(&dt.Domain{})
+		s.Conn.CreateTable(&dt.Group{})
+		s.Conn.CreateTable(&dt.GroupMatrix{})
 	} else {
 		//TODO: Test schema
 		//test schema
