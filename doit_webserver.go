@@ -11,6 +11,12 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func (ds *DoitServer) ReturnBadRequest(w http.ResponseWriter, r *http.Request) error {
+	w.WriteHeader(http.StatusBadRequest)
+	ds.logger(r, http.StatusBadRequest, 0)
+	return nil
+}
+
 func (ds *DoitServer) ReturnInternalServerError(w http.ResponseWriter, r *http.Request) error {
 	w.WriteHeader(http.StatusInternalServerError)
 	ds.logger(r, http.StatusInternalServerError, 0)

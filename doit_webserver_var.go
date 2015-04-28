@@ -18,8 +18,7 @@ func (ds *DoitServer) apiVarsHandler(w http.ResponseWriter, r *http.Request) {
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 
@@ -53,8 +52,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 
@@ -122,8 +120,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 

@@ -11,7 +11,7 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		ds.ReturnInternalServerError(w , r)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	vars := mux.Vars(r)
@@ -21,8 +21,7 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 
@@ -55,7 +54,7 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 		}
 		err = ds.RemoveGroup(d, g)
 		if err != nil {
-			ds.ReturnInternalServerError(w , r)
+			ds.ReturnInternalServerError(w, r)
 			return
 		}
 		ds.ReturnOK(w, r)
@@ -66,7 +65,7 @@ func (ds *DoitServer) apiGroupHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		ds.ReturnInternalServerError(w , r)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	vars := mux.Vars(r)
@@ -75,8 +74,7 @@ func (ds *DoitServer) apiGroupHandler(w http.ResponseWriter, r *http.Request) {
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 
@@ -109,7 +107,7 @@ func (ds *DoitServer) apiGroupHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		err = ds.RemoveGroup(d, g)
 		if err != nil {
-			ds.ReturnInternalServerError(w , r)
+			ds.ReturnInternalServerError(w, r)
 			return
 		}
 		ds.ReturnOK(w, r)
@@ -120,15 +118,14 @@ func (ds *DoitServer) apiGroupsHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		ds.ReturnInternalServerError(w , r)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	domain := r.Form.Get("domain")
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 

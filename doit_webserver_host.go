@@ -22,8 +22,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 
@@ -91,8 +90,7 @@ func (ds *DoitServer) apiHostHandler(w http.ResponseWriter, r *http.Request) {
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 
@@ -121,13 +119,13 @@ func (ds *DoitServer) apiHostHandler(w http.ResponseWriter, r *http.Request) {
 	case "DELETE":
 		h, err := ds.GetHostByName(d, reqName)
 		if err != nil {
-			w.WriteHeader(404)
+			ds.ReturnNotFound(w, r)
 		}
 		err = ds.RemoveHost(d, h)
 		if err != nil {
-			w.WriteHeader(500)
+			ds.ReturnInternalServerError(w, r)
 		}
-		w.WriteHeader(200)
+		ds.ReturnOK(w, r)
 	default:
 		ds.ReturnNotImplemented(w, r)
 		return
@@ -145,8 +143,7 @@ func (ds *DoitServer) apiHostsHandler(w http.ResponseWriter, r *http.Request) {
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 
@@ -180,8 +177,7 @@ func (ds *DoitServer) apiHostVarsHandler(w http.ResponseWriter, r *http.Request)
 
 	d, err := ds.DomainCheck(domain)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		ds.logger(r, http.StatusBadRequest, 0)
+		ds.ReturnBadRequest(w, r)
 		return
 	}
 
