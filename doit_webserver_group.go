@@ -47,8 +47,7 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 		ds.ReturnOK(w, r)
 	case "PUT":
 		//TODO: Add group items here
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 	case "DELETE":
 		g, err := ds.GetGroupByName(d, reqName)
 		if err != nil {
@@ -104,8 +103,7 @@ func (ds *DoitServer) apiGroupHandler(w http.ResponseWriter, r *http.Request) {
 		ds.ReturnOK(w, r)
 	case "PUT":
 		//TODO: Add group items here
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotFound(w, r)
 	case "DELETE":
 		g, err := ds.GetGroupByName(d, reqName)
 		if err != nil {
@@ -151,8 +149,7 @@ func (ds *DoitServer) apiGroupsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }

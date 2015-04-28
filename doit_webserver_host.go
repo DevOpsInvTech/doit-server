@@ -75,8 +75,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 		}
 		ds.ReturnOK(w, r)
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }
@@ -122,8 +121,7 @@ func (ds *DoitServer) apiHostHandler(w http.ResponseWriter, r *http.Request) {
 		ds.ReturnOK(w, r)
 	case "PUT":
 		//TODO: Add host items here
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 	case "DELETE":
 		h, err := ds.GetHostByName(d, reqName)
 		if err != nil {
@@ -135,8 +133,7 @@ func (ds *DoitServer) apiHostHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		w.WriteHeader(200)
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }
@@ -170,8 +167,7 @@ func (ds *DoitServer) apiHostsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }
@@ -212,8 +208,7 @@ func (ds *DoitServer) apiHostVarsHandler(w http.ResponseWriter, r *http.Request)
 			return
 		}
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }

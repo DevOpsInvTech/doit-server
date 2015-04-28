@@ -36,8 +36,7 @@ func (ds *DoitServer) apiVarsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }
@@ -89,8 +88,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 		err = ds.UpdateVar(d, v.ID, "")
 		if err != nil {
 			//TODO: WHAT TO RETURN HERE?
-			w.WriteHeader(http.StatusNotImplemented)
-			ds.logger(r, http.StatusNotImplemented, 0)
+			ds.ReturnNotImplemented(w, r)
 			return
 		}
 		ds.ReturnOK(w, r)
@@ -108,8 +106,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		ds.ReturnOK(w, r)
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }
@@ -162,8 +159,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 		err = ds.UpdateVar(d, v.ID, reqValue)
 		if err != nil {
 			//TODO: WHAT TO RETURN HERE?
-			w.WriteHeader(http.StatusNotImplemented)
-			ds.logger(r, http.StatusNotImplemented, 0)
+			ds.ReturnNotImplemented(w, r)
 			return
 		}
 		ds.ReturnOK(w, r)
@@ -181,8 +177,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 		}
 		ds.ReturnOK(w, r)
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }

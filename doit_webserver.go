@@ -11,6 +11,12 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func (ds *DoitServer) ReturnNotImplemented(w http.ResponseWriter, r *http.Request) error {
+	w.WriteHeader(http.StatusNotImplemented)
+	ds.logger(r, http.StatusNotImplemented, 0)
+	return nil
+}
+
 func (ds *DoitServer) ReturnOK(w http.ResponseWriter, r *http.Request) error {
 	w.WriteHeader(http.StatusOK)
 	ds.logger(r, http.StatusOK, 0)

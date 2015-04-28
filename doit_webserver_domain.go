@@ -37,8 +37,7 @@ func (ds *DoitServer) apiDomainHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		ds.ReturnOK(w, r)
 	case "PUT":
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotFound(w, r)
 	case "DELETE":
 		d, err := ds.GetDomainByName(reqName)
 		if err != nil {
@@ -80,8 +79,7 @@ func (ds *DoitServer) apiDomainsHandler(w http.ResponseWriter, r *http.Request) 
 			return
 		}
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotFound(w, r)
 		return
 	}
 }
