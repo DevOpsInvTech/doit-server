@@ -35,7 +35,5 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-	} else {
-		//TODO: Act as a CLI client
 	}
 }

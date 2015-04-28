@@ -44,8 +44,7 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "PUT":
 		//TODO: Add group items here
 		w.WriteHeader(http.StatusNotImplemented)
@@ -62,8 +61,7 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 			ds.logger(r, http.StatusInternalServerError, 0)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	}
 }
 
@@ -103,8 +101,7 @@ func (ds *DoitServer) apiGroupHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "PUT":
 		//TODO: Add group items here
 		w.WriteHeader(http.StatusNotImplemented)
@@ -121,8 +118,7 @@ func (ds *DoitServer) apiGroupHandler(w http.ResponseWriter, r *http.Request) {
 			ds.logger(r, http.StatusInternalServerError, 0)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	}
 }
 

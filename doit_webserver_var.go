@@ -79,8 +79,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "PUT":
 		v, err := ds.GetVarByName(d, reqName)
 		if err != nil {
@@ -94,8 +93,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 			ds.logger(r, http.StatusNotImplemented, 0)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "DELETE":
 		v, err := ds.GetVarByName(d, reqName)
 		if err != nil {
@@ -108,8 +106,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 			ds.logger(r, http.StatusInternalServerError, 0)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	default:
 		w.WriteHeader(http.StatusNotImplemented)
 		ds.logger(r, http.StatusNotImplemented, 0)
@@ -155,8 +152,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "PUT":
 		v, err := ds.GetVarByName(d, reqName)
 		if err != nil {
@@ -170,8 +166,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 			ds.logger(r, http.StatusNotImplemented, 0)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "DELETE":
 		v, err := ds.GetVarByName(d, reqName)
 		if err != nil {
@@ -184,8 +179,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 			ds.logger(r, http.StatusInternalServerError, 0)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	default:
 		w.WriteHeader(http.StatusNotImplemented)
 		ds.logger(r, http.StatusNotImplemented, 0)

@@ -56,8 +56,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "PUT":
 		//TODO: Add host items here
 		log.Println(value)
@@ -74,8 +73,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	default:
 		w.WriteHeader(http.StatusNotImplemented)
 		ds.logger(r, http.StatusNotImplemented, 0)
@@ -121,8 +119,7 @@ func (ds *DoitServer) apiHostHandler(w http.ResponseWriter, r *http.Request) {
 			ds.logger(r, http.StatusNotFound, 0)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "PUT":
 		//TODO: Add host items here
 		w.WriteHeader(http.StatusNotImplemented)

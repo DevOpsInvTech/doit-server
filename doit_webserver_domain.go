@@ -35,8 +35,7 @@ func (ds *DoitServer) apiDomainHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	case "PUT":
 		w.WriteHeader(http.StatusNotImplemented)
 		ds.logger(r, http.StatusNotImplemented, 0)
@@ -52,8 +51,7 @@ func (ds *DoitServer) apiDomainHandler(w http.ResponseWriter, r *http.Request) {
 			ds.logger(r, http.StatusInternalServerError, 0)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		ds.logger(r, http.StatusOK, 0)
+		ds.ReturnOK(w, r)
 	default:
 		w.WriteHeader(http.StatusNotImplemented)
 		ds.logger(r, http.StatusNotImplemented, 0)
