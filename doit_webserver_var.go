@@ -11,8 +11,7 @@ func (ds *DoitServer) apiVarsHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	domain := r.Form.Get("domain")
@@ -45,8 +44,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	vars := mux.Vars(r)
@@ -100,8 +98,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		err = ds.RemoveVar(d, v)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			ds.logger(r, http.StatusInternalServerError, 0)
+			ds.ReturnInternalServerError(w, r)
 			return
 		}
 		ds.ReturnOK(w, r)
@@ -115,8 +112,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	vars := mux.Vars(r)
@@ -171,8 +167,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 		}
 		err = ds.RemoveVar(d, v)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			ds.logger(r, http.StatusInternalServerError, 0)
+			ds.ReturnInternalServerError(w, r)
 			return
 		}
 		ds.ReturnOK(w, r)

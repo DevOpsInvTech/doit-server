@@ -11,8 +11,7 @@ func (ds *DoitServer) apiDomainHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	vars := mux.Vars(r)
@@ -46,14 +45,12 @@ func (ds *DoitServer) apiDomainHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		err = ds.RemoveDomain(d)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			ds.logger(r, http.StatusInternalServerError, 0)
+			ds.ReturnInternalServerError(w, r)
 			return
 		}
 		ds.ReturnOK(w, r)
 	default:
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 		return
 	}
 }
@@ -62,8 +59,7 @@ func (ds *DoitServer) apiDomainsHandler(w http.ResponseWriter, r *http.Request) 
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 

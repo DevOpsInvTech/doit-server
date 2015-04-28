@@ -11,6 +11,12 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func (ds *DoitServer) ReturnInternalServerError(w http.ResponseWriter, r *http.Request) error {
+	w.WriteHeader(http.StatusInternalServerError)
+	ds.logger(r, http.StatusInternalServerError, 0)
+	return nil
+}
+
 func (ds *DoitServer) ReturnNotImplemented(w http.ResponseWriter, r *http.Request) error {
 	w.WriteHeader(http.StatusNotImplemented)
 	ds.logger(r, http.StatusNotImplemented, 0)

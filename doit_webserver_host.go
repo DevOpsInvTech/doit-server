@@ -11,8 +11,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	vars := mux.Vars(r)
@@ -60,8 +59,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 	case "PUT":
 		//TODO: Add host items here
 		log.Println(value)
-		w.WriteHeader(http.StatusNotImplemented)
-		ds.logger(r, http.StatusNotImplemented, 0)
+		ds.ReturnNotImplemented(w, r)
 	case "DELETE":
 		h, err := ds.GetHostByName(d, reqName)
 		if err != nil {
@@ -84,8 +82,7 @@ func (ds *DoitServer) apiHostHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	vars := mux.Vars(r)
@@ -114,8 +111,7 @@ func (ds *DoitServer) apiHostHandler(w http.ResponseWriter, r *http.Request) {
 		_, err := ds.AddHost(d, reqName)
 		if err != nil {
 			//TODO: What error to throw here?
-			w.WriteHeader(http.StatusNotFound)
-			ds.logger(r, http.StatusNotFound, 0)
+			ds.ReturnNotFound(w, r)
 			return
 		}
 		ds.ReturnOK(w, r)
@@ -142,8 +138,7 @@ func (ds *DoitServer) apiHostsHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	domain := r.Form.Get("domain")
@@ -176,8 +171,7 @@ func (ds *DoitServer) apiHostVarsHandler(w http.ResponseWriter, r *http.Request)
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		ds.logger(r, http.StatusInternalServerError, 0)
+		ds.ReturnInternalServerError(w, r)
 		return
 	}
 	vars := mux.Vars(r)
