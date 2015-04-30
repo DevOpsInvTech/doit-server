@@ -20,6 +20,7 @@ func (ds *DoitServer) AddHost(d *dt.Domain, name string) (h *dt.Host, err error)
 
 //AddHostVars Add new Vars to Host
 func (ds *DoitServer) AddHostVars(d *dt.Domain, id int, vars ...*dt.HostVar) error {
+	fmt.Printf("%#v", vars)
 	h, err := ds.GetHost(d, id)
 	if err != nil {
 		return err

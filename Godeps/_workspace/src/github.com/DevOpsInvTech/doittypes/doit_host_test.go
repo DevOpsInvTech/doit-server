@@ -1,4 +1,4 @@
-package main
+package doittypes
 
 import (
 	"os"
@@ -8,8 +8,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func TestVarDBBasic(t *testing.T) {
-	testDBFile := "_test_tmp/TestVarDBBasic.db"
+func TestHostDBBasic(t *testing.T) {
+	testDBFile := "_test_tmp/TestHostDBBasic.db"
 	//Remove testing file
 	os.Remove(testDBFile)
 	db, err := gorm.Open("sqlite3", testDBFile)
@@ -17,16 +17,16 @@ func TestVarDBBasic(t *testing.T) {
 		t.Fatal(err)
 	}
 	db.DB()
-	db.CreateTable(&Var{})
+	db.CreateTable(&Host{})
 
-	testVar := &Var{Name: "Potato", Value: "Spud"}
-	db.NewRecord(testVar)
-	db.Create(&testVar)
+	testHost := &Host{Name: "Potato"}
+	db.NewRecord(testHost)
+	db.Create(&testHost)
 	db.Close()
 }
 
-func TestVarDBUpdate(t *testing.T) {
-	testDBFile := "_test_tmp/TestVarDBUpdate.db"
+func TestHostVarDBBasic(t *testing.T) {
+	testDBFile := "_test_tmp/TestHostVarDBBasic.db"
 	//Remove testing file
 	os.Remove(testDBFile)
 	db, err := gorm.Open("sqlite3", testDBFile)
@@ -34,20 +34,15 @@ func TestVarDBUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	db.DB()
+	db.CreateTable(&Host{})
 	db.CreateTable(&Var{})
 
 	testVar := &Var{Name: "Potato", Value: "Spud"}
 	db.NewRecord(testVar)
 	db.Create(&testVar)
 
-	v := &Var{ID: testVar.ID}
-	db.First(&v)
-	if v.Name != "" {
-		v.Value = "Clock"
-		db.Save(&v)
-	} else {
-		t.Fatal("Unable to find document")
-	}
-
+	testHost := &Host{Name: "Potato"}
+	db.NewRecord(testHost)
+	db.Create(&testHost)
 	db.Close()
 }

@@ -1,10 +1,10 @@
 {
-	"ImportPath": "github.com/robwc/doit-server",
+	"ImportPath": "github.com/DevOpsInvTech/doit-server",
 	"GoVersion": "go1.4.2",
 	"Deps": [
 		{
-			"ImportPath": "github.com/DevOpsInvTech/doit-types",
-			"Rev": "525c4171f8f4e10dc528fce3dfa61fb14a61df07"
+			"ImportPath": "github.com/DevOpsInvTech/doittypes",
+			"Rev": "1e14e5e631321acc43a30b9b3af49cebb184ce52"
 		},
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",
