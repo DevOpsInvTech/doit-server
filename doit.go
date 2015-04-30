@@ -2,8 +2,7 @@ package main
 
 import (
 	"flag"
-
-	log "github.com/Sirupsen/logrus"
+	"log"
 )
 
 func main() {
@@ -25,7 +24,7 @@ func main() {
 		}
 	} else {
 		//manual load config
-
+		log.Fatal("Unable to load config")
 	}
 
 	if *serverMode {

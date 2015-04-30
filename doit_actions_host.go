@@ -116,7 +116,7 @@ func (ds *DoitServer) GetHostVar(d *dt.Domain, id int) (*dt.HostVar, error) {
 //GetHostVars Get HostVar from datastore
 func (ds *DoitServer) GetHostVars(d *dt.Domain, h *dt.Host) ([]*dt.HostVar, error) {
 	v := []*dt.HostVar{}
-	gormErr := ds.Store.Conn.Where("host_id = ? and domain_id = ?", h.ID, d.ID).Where(&v)
+	gormErr := ds.Store.Conn.Where("host_id = ? and domain_id = ?", h.ID, d.ID).Find(&v)
 	if gormErr.Error != nil {
 		return nil, gormErr.Error
 	}
