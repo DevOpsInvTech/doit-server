@@ -50,7 +50,7 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		err = ds.AddHostVars(d, h.ID, &dt.HostVar{Name: varName, Value: value, Domain: d})
+		err = ds.AddHostVars(d, h.ID, &dt.HostVar{Name: varName, Value: value, Domain: d, Host: h})
 		if err != nil {
 			//TODO: What error to throw here?
 			ds.ReturnNotFound(w, r)

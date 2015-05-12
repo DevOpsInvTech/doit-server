@@ -80,6 +80,17 @@ func TestDoitActionAddHostVars(t *testing.T) {
 	} else {
 		t.Fatal("No Vars seen")
 	}
+
+	//Test hostvars
+	hv, err := ds.GetHostVars(domain, checkHost)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(hv) == 2 {
+		t.Log("Two host vars seen")
+	} else {
+		t.Fatal("Host Vars found", hv)
+	}
 	ds.CloseDatastore()
 }
 
