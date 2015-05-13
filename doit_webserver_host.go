@@ -5,7 +5,6 @@ import (
 
 	dt "github.com/DevOpsInvTech/doittypes"
 	log "github.com/Sirupsen/logrus"
-
 	"github.com/gorilla/mux"
 )
 
@@ -35,15 +34,12 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		hv, err := ds.GetHostVarByName(d, h, reqName)
+		hv, err := ds.GetHostVarByName(d, h, varName)
 		if err != nil {
 			ds.ReturnNotFound(w, r)
 			return
 		}
 		ds.ReturnJSON(hv, w, r)
-		if err != nil {
-			return
-		}
 	case "POST":
 		h, err := ds.GetHostByName(d, reqName)
 		if err != nil {
@@ -59,12 +55,12 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 		ds.ReturnOK(w, r)
 	case "PUT":
 		//TODO: Add host items here
-		log.Println(value)
 		ds.ReturnNotImplemented(w, r)
 	case "DELETE":
 		h, err := ds.GetHostByName(d, reqName)
 		if err != nil {
-			w.WriteHeader(404)
+			ds.ReturnNotFound(w, r)
+			return
 		}
 		err = ds.RemoveHostVars(d, h.ID, &dt.HostVar{Name: varName, Value: value, Domain: d})
 		if err != nil {

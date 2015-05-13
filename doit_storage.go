@@ -31,6 +31,7 @@ func (s *DoitStorage) InitSchema(overwrite bool) {
 		s.Conn.CreateTable(&dt.Var{})
 		s.Conn.CreateTable(&dt.Domain{})
 		s.Conn.CreateTable(&dt.Group{})
+		s.Conn.CreateTable(&dt.GroupVar{})
 		s.Conn.CreateTable(&dt.GroupMatrix{})
 	} else {
 		//TODO: Test schema

@@ -15,7 +15,7 @@ func (ds *DoitServer) AddGroup(d *dt.Domain, name string) (g *dt.Group, err erro
 }
 
 //AddGroupVars Add new Vars to Host
-func (ds *DoitServer) AddGroupVars(d *dt.Domain, id int, vars ...dt.Var) error {
+func (ds *DoitServer) AddGroupVars(d *dt.Domain, id int, vars ...dt.GroupVar) error {
 	domain, err := ds.GetDomain(d.ID)
 	if err != nil {
 		return err
@@ -29,7 +29,7 @@ func (ds *DoitServer) AddGroupVars(d *dt.Domain, id int, vars ...dt.Var) error {
 }
 
 //RemoveGroupVars Remove Vars from Host
-func (ds *DoitServer) RemoveGroupVars(d *dt.Domain, id int, vars ...dt.Var) error {
+func (ds *DoitServer) RemoveGroupVars(d *dt.Domain, id int, vars ...dt.GroupVar) error {
 	domain, err := ds.GetDomain(d.ID)
 	if err != nil {
 		return err
@@ -164,4 +164,34 @@ func (ds *DoitServer) GetGroupsByDomain(d *dt.Domain) ([]*dt.Group, error) {
 		return nil, gormErr.Error
 	}
 	return g, nil
+}
+
+//GetGroupVar Get GroupVar from datastore
+func (ds *DoitServer) GetGroupVar(d *dt.Domain, id int) (*dt.GroupVar, error) {
+	v := &dt.GroupVar{}
+	gormErr := ds.Store.Conn.Where("id = ? and domain_id = ?", id, d.ID).First(&v)
+	if gormErr.Error != nil {
+		return nil, gormErr.Error
+	}
+	return v, nil
+}
+
+//GetGroupVars Get GroupVars from datastore
+func (ds *DoitServer) GetGroupVars(d *dt.Domain, g *dt.Group) ([]*dt.GroupVar, error) {
+	v := []*dt.GroupVar{}
+	gormErr := ds.Store.Conn.Where("group_id = ? and domain_id = ?", g.ID, d.ID).Find(&v)
+	if gormErr.Error != nil {
+		return nil, gormErr.Error
+	}
+	return v, nil
+}
+
+//GetGroupVarByName Get GroupVar by name
+func (ds *DoitServer) GetGroupVarByName(d *dt.Domain, g *dt.Group, name string) (*dt.GroupVar, error) {
+	v := &dt.GroupVar{}
+	gormErr := ds.Store.Conn.Where("name = ? and domain_id = ? and group_id = ?", name, d.ID, g.ID).First(&v)
+	if gormErr.Error != nil {
+		return nil, gormErr.Error
+	}
+	return v, nil
 }
