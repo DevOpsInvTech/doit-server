@@ -3,8 +3,21 @@ test:
 	-rm _test_tmp/*.db
 	godep go test -v .
 
+clean:
+	-rm _test_tmp/*.db
+
 build:
 	godep go build .
+
+all:
+	godep go install -a
+	godep go build .
+
+run:
+	./doit-server -c test_configs/test-config.yml -s
+
+update_deps:
+	godep update github.com/DevOpsInvTech/doittypes
 
 test_api:
 	#Create domain

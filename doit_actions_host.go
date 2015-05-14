@@ -19,7 +19,7 @@ func (ds *DoitServer) AddHost(d *dt.Domain, name string) (h *dt.Host, err error)
 }
 
 //AddHostVars Add new Vars to Host
-func (ds *DoitServer) AddHostVars(d *dt.Domain, id int, vars ...*dt.HostVar) error {
+func (ds *DoitServer) AddHostVars(d *dt.Domain, id int, vars ...*dt.Var) error {
 	h, err := ds.GetHost(d, id)
 	if err != nil {
 		return err
@@ -29,7 +29,7 @@ func (ds *DoitServer) AddHostVars(d *dt.Domain, id int, vars ...*dt.HostVar) err
 }
 
 //RemoveHostVars Remove Vars from Host
-func (ds *DoitServer) RemoveHostVars(d *dt.Domain, id int, vars ...*dt.HostVar) error {
+func (ds *DoitServer) RemoveHostVars(d *dt.Domain, id int, vars ...*dt.Var) error {
 	h, err := ds.GetHost(d, id)
 	if err != nil {
 		return err
@@ -103,8 +103,8 @@ func (ds *DoitServer) GetHostsByDomain(d *dt.Domain) ([]*dt.Host, error) {
 }
 
 //GetHostVar Get HostVar from datastore
-func (ds *DoitServer) GetHostVar(d *dt.Domain, id int) (*dt.HostVar, error) {
-	v := &dt.HostVar{}
+func (ds *DoitServer) GetHostVar(d *dt.Domain, id int) (*dt.Var, error) {
+	v := &dt.Var{}
 	gormErr := ds.Store.Conn.Where("id = ? and domain_id = ?", id, d.ID).First(&v)
 	if gormErr.Error != nil {
 		return nil, gormErr.Error
@@ -113,8 +113,8 @@ func (ds *DoitServer) GetHostVar(d *dt.Domain, id int) (*dt.HostVar, error) {
 }
 
 //GetHostVars Get HostVar from datastore
-func (ds *DoitServer) GetHostVars(d *dt.Domain, h *dt.Host) ([]*dt.HostVar, error) {
-	v := []*dt.HostVar{}
+func (ds *DoitServer) GetHostVars(d *dt.Domain, h *dt.Host) ([]*dt.Var, error) {
+	v := []*dt.Var{}
 	gormErr := ds.Store.Conn.Where("host_id = ? and domain_id = ?", h.ID, d.ID).Find(&v)
 	if gormErr.Error != nil {
 		return nil, gormErr.Error
@@ -123,8 +123,8 @@ func (ds *DoitServer) GetHostVars(d *dt.Domain, h *dt.Host) ([]*dt.HostVar, erro
 }
 
 //GetHostVarByName Get host var by name
-func (ds *DoitServer) GetHostVarByName(d *dt.Domain, h *dt.Host, name string) (*dt.HostVar, error) {
-	v := &dt.HostVar{}
+func (ds *DoitServer) GetHostVarByName(d *dt.Domain, h *dt.Host, name string) (*dt.Var, error) {
+	v := &dt.Var{}
 	gormErr := ds.Store.Conn.Where("name = ? and domain_id = ? and host_id = ?", name, d.ID, h.ID).First(&v)
 	if gormErr.Error != nil {
 		return nil, gormErr.Error

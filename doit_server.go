@@ -54,8 +54,8 @@ func (ds *DoitServer) Listen(port *string, config *DoitConfig) (err error) {
 	//groups
 	r.HandleFunc("/api/v1/group/{name}/var/{varName}/value/{value}", ds.apiGroupVarHandler).Methods("POST", "DELETE", "PUT", "GET")
 	r.HandleFunc("/api/v1/group/{name}/vars", ds.apiGroupVarsHandler).Methods("GET")
-	r.HandleFunc("/api/v1/group/{name}/host/{hostName}", ds.apiGroupHostHandler).Methods("POST", "DELETE", "PUT", "GET")
-	r.HandleFunc("/api/v1/group/{name}/hosts", ds.apiGroupHostsHandler).Methods("GET")
+	r.HandleFunc("/api/v1/group/{name}/host/{hostName}", ds.apiGroupVarHandler).Methods("POST", "DELETE", "PUT", "GET")
+	r.HandleFunc("/api/v1/group/{name}/hosts", ds.apiGroupVarHandler).Methods("GET")
 	r.HandleFunc("/api/v1/group/{name}", ds.apiGroupHandler).Methods("POST", "DELETE", "PUT", "GET")
 	r.HandleFunc("/api/v1/groups", ds.apiGroupsHandler).Methods("GET")
 	//hosts

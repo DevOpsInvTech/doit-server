@@ -46,7 +46,7 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		err = ds.AddGroupVars(d, g.ID, &dt.GroupVar{Name: varName, Value: value, Domain: d, Group: g})
+		err = ds.AddGroupVars(d, g.ID, &dt.Var{Name: varName, Value: value, Domain: d, Group: g})
 		if err != nil {
 			//TODO: What error to throw here?
 			ds.ReturnNotFound(w, r)
