@@ -95,7 +95,7 @@ func (ds *DoitServer) GetHostByName(d *dt.Domain, name string) (*dt.Host, error)
 //GetHostsByDomain Get host from datastore
 func (ds *DoitServer) GetHostsByDomain(d *dt.Domain) ([]*dt.Host, error) {
 	h := []*dt.Host{}
-	gormErr := ds.Store.Conn.Where("domain_id = ?", d.ID).Find(&h)
+	gormErr := ds.Store.Conn.Where("domain_id = ? and ifnull(host_id, '') = '' and  ifnull(group_id, '') = ''", d.ID).Find(&h)
 	if gormErr.Error != nil {
 		return nil, gormErr.Error
 	}

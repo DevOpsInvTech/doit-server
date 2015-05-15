@@ -26,18 +26,29 @@ func NewStorage(t string, loc string) (*DoitStorage, error) {
 
 func (s *DoitStorage) InitSchema(overwrite bool) {
 	if overwrite {
-		s.Conn.CreateTable(&dt.Host{})
-		//s.Conn.CreateTable(&dt.HostVar{})
-		s.Conn.CreateTable(&dt.Var{})
-		s.Conn.CreateTable(&dt.Domain{})
-		s.Conn.CreateTable(&dt.Group{})
-		//s.Conn.CreateTable(&dt.GroupVar{})
-		s.Conn.CreateTable(&dt.GroupMatrix{})
+		s.DeleteSchema()
+		s.CreateSchema()
 	} else {
 		//TODO: Test schema
 		//test schema
 	}
 
+}
+
+func (s *DoitStorage) CreateSchema() {
+	s.Conn.CreateTable(&dt.Host{})
+	s.Conn.CreateTable(&dt.Var{})
+	s.Conn.CreateTable(&dt.Domain{})
+	s.Conn.CreateTable(&dt.Group{})
+	s.Conn.CreateTable(&dt.GroupMatrix{})
+}
+
+func (s *DoitStorage) DeleteSchema() {
+	s.Conn.DropTable(&dt.Host{})
+	s.Conn.DropTable(&dt.Var{})
+	s.Conn.DropTable(&dt.Domain{})
+	s.Conn.DropTable(&dt.Group{})
+	s.Conn.DropTable(&dt.GroupMatrix{})
 }
 
 func (s *DoitStorage) Close() error {

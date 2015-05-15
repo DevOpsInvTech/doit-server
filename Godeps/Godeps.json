@@ -4,7 +4,7 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/DevOpsInvTech/doittypes",
-			"Rev": "ce0528a5d64cf5a8a97d192339af93000fe63598"
+			"Rev": "3e4996a0eda6b631175a4a28c064235539f10f09"
 		},
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",

@@ -112,6 +112,109 @@ func (ds *DoitServer) apiGroupVarsHandler(w http.ResponseWriter, r *http.Request
 	}
 }
 
+func (ds *DoitServer) apiGroupHostHandler(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Errorln("Unable to parse message", err)
+		ds.ReturnInternalServerError(w, r)
+		return
+	}
+	vars := mux.Vars(r)
+	domain := r.Form.Get("domain")
+	reqName := vars["name"]
+	hostName := vars["hostName"]
+
+	d, err := ds.DomainCheck(domain)
+	if err != nil {
+		ds.ReturnBadRequest(w, r)
+		return
+	}
+
+	switch r.Method {
+	case "GET":
+		g, err := ds.GetGroupByName(d, reqName)
+		if err != nil {
+			ds.ReturnNotFound(w, r)
+			return
+		}
+		gv, err := ds.GetGroupHostByName(d, g, hostName)
+		if err != nil {
+			ds.ReturnNotFound(w, r)
+			return
+		}
+		ds.ReturnJSON(gv, w, r)
+	case "POST":
+		g, err := ds.GetGroupByName(d, reqName)
+		if err != nil {
+			ds.ReturnNotFound(w, r)
+			return
+		}
+		err = ds.AddGroupHosts(d, g.ID, &dt.Host{Name: hostName, Domain: d, Group: g})
+		if err != nil {
+			//TODO: What error to throw here?
+			ds.ReturnNotFound(w, r)
+			return
+		}
+		ds.ReturnOK(w, r)
+	case "PUT":
+		//TODO: Add group items here
+		ds.ReturnNotImplemented(w, r)
+	case "DELETE":
+		g, err := ds.GetGroupByName(d, reqName)
+		if err != nil {
+			ds.ReturnNotFound(w, r)
+			return
+		}
+		err = ds.RemoveGroupVars(d, g.ID)
+		if err != nil {
+			ds.ReturnInternalServerError(w, r)
+			return
+		}
+		ds.ReturnOK(w, r)
+	default:
+		ds.ReturnNotImplemented(w, r)
+	}
+}
+
+func (ds *DoitServer) apiGroupHostsHandler(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Errorln("Unable to parse message", err)
+		ds.ReturnInternalServerError(w, r)
+		return
+	}
+	vars := mux.Vars(r)
+	domain := r.Form.Get("domain")
+	reqName := vars["name"]
+
+	d, err := ds.DomainCheck(domain)
+	if err != nil {
+		ds.ReturnBadRequest(w, r)
+		return
+	}
+
+	switch r.Method {
+	case "GET":
+		g, err := ds.GetGroupByName(d, reqName)
+		if err != nil {
+			ds.ReturnNotFound(w, r)
+			return
+		}
+		hv, err := ds.GetGroupHosts(d, g)
+		if err != nil {
+			ds.ReturnNotFound(w, r)
+			return
+		}
+		ds.ReturnJSON(hv, w, r)
+		if err != nil {
+			return
+		}
+	default:
+		ds.ReturnNotImplemented(w, r)
+		return
+	}
+}
+
 func (ds *DoitServer) apiGroupHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {

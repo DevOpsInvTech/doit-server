@@ -60,7 +60,7 @@ func (ds *DoitServer) GetVarByName(d *dt.Domain, name string) (*dt.Var, error) {
 //GetVarsByDomain Get Vars from datastore
 func (ds *DoitServer) GetVarsByDomain(d *dt.Domain) ([]*dt.Var, error) {
 	vars := []*dt.Var{}
-	gormErr := ds.Store.Conn.Where("domain_id = ?", d.ID).Find(&vars)
+	gormErr := ds.Store.Conn.Where("domain_id = ? and ifnull(host_id, '') = '' and  ifnull(group_id, '') = ''", d.ID).Find(&vars)
 	if gormErr.Error != nil {
 		return vars, gormErr.Error
 	}
