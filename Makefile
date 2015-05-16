@@ -78,3 +78,12 @@ test_api:
 	#Get group hosts
 	curl -is -X GET http://localhost:8080/api/v1/group/hips/hosts?domain=foo
 	@printf "\n"
+	#Add group host var 1
+	curl -is -X POST http://localhost:8080/api/v1/group/hips/host/stevo/var/attack/value/crack?domain=foo
+	@printf "\n"
+	#Add group host var 2
+	curl -is -X POST http://localhost:8080/api/v1/group/hips/host/stevo/var/shoe/value/nike?domain=foo
+	@printf "\n"
+	#Get group host vars
+	curl -is -X GET http://localhost:8080/api/v1/group/hips/host/stevo/vars?domain=foo
+	@printf "\n"

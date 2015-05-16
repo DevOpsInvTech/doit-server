@@ -2,7 +2,8 @@ package main
 
 import (
 	"flag"
-	"log"
+
+	log "github.com/Sirupsen/logrus"
 )
 
 func main() {
@@ -20,7 +21,7 @@ func main() {
 		//load config
 		err := dc.Read(*config)
 		if err != nil {
-			log.Fatal("Unable to load config file", err)
+			log.Fatalln("Unable to load config file", err)
 		}
 	} else {
 		//manual load config
@@ -29,10 +30,13 @@ func main() {
 
 	if *serverMode {
 		storage, err := NewStorage(dc.Storage.Type, dc.Storage.Location)
+		if err != nil {
+			log.Fatalln("Unable to connect to storage:", err)
+		}
 		ds := &DoitServer{Store: storage}
 		err = ds.Listen(port, dc)
 		if err != nil {
-			log.Fatal("Unable to listen on specified port:", err)
+			log.Fatalln("Unable to listen on specified port:", err)
 		}
 	}
 }
