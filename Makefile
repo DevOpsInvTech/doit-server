@@ -60,6 +60,9 @@ test_api:
 	#Create group
 	curl -is -X POST http://localhost:8080/api/v1/group/hips?domain=foo
 	@printf "\n"
+	#Get groups
+	curl -is -X GET http://localhost:8080/api/v1/groups?domain=foo
+	@printf "\n"
 	#Add group var
 	curl -is -X POST http://localhost:8080/api/v1/group/hips/var/pants/value/jeans?domain=foo
 	@printf "\n"
@@ -86,4 +89,7 @@ test_api:
 	@printf "\n"
 	#Get group host vars
 	curl -is -X GET http://localhost:8080/api/v1/group/hips/host/stevo/vars?domain=foo
+	@printf "\n"
+	#Get all
+	curl -is -X GET http://localhost:8080/api/v1/all?domain=foo
 	@printf "\n"

@@ -22,6 +22,7 @@ func NewStorage(t string, loc string) (*DoitStorage, error) {
 
 	s := &DoitStorage{Conn: db, Type: t, Location: loc}
 	s.Conn.DB()
+	s.Conn.LogMode(true)
 	db.DB().Ping()
 	return s, nil
 }

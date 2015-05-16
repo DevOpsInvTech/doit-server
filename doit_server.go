@@ -38,7 +38,7 @@ func (ds *DoitServer) Listen(port *string, config *DoitConfig) (err error) {
 	//APIv1 Subrouter
 	apiV1R := r.PathPrefix("/api/v1").Subrouter()
 	//All items in a domain
-	apiV1R.HandleFunc("/all", nil).Methods("GET")
+	apiV1R.HandleFunc("/all", ds.apiGetAllByDomain).Methods("GET")
 
 	//domains
 	apiV1R.HandleFunc("/domain/{name}", ds.apiDomainHandler).Methods("POST", "DELETE", "PUT", "GET")
