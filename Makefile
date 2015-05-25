@@ -1,7 +1,7 @@
 
 test:
 	-rm _test_tmp/*.db
-	godep go test -is .
+	godep go test -v .
 
 clean:
 	-rm _test_tmp/*.db
