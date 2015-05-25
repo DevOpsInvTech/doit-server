@@ -6,7 +6,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 )
 
-func (ds *DoitServer) apiGetAllByDomain(w http.ResponseWriter, r *http.Request) {
+func (ds *DoitServer) ansibleGroupHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Errorln("Unable to parse message", err)
@@ -28,7 +28,8 @@ func (ds *DoitServer) apiGetAllByDomain(w http.ResponseWriter, r *http.Request) 
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		err = ds.ReturnJSON(a, w, r)
+		ad := a.MarshalAnsible()
+		err = ds.ReturnJSON(ad, w, r)
 		if err != nil {
 			return
 		}

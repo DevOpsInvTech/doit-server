@@ -39,7 +39,10 @@ func (ds *DoitServer) apiHostVarHandler(w http.ResponseWriter, r *http.Request) 
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(hv, w, r)
+		err = ds.ReturnJSON(hv, w, r)
+		if err != nil {
+			return
+		}
 	case "POST":
 		h, err := ds.GetHostByName(d, reqName)
 		if err != nil {
@@ -99,7 +102,7 @@ func (ds *DoitServer) apiHostHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(h, w, r)
+		err = ds.ReturnJSON(h, w, r)
 		if err != nil {
 			return
 		}
@@ -152,7 +155,7 @@ func (ds *DoitServer) apiHostsHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(h, w, r)
+		err = ds.ReturnJSON(h, w, r)
 		if err != nil {
 			return
 		}
@@ -191,7 +194,7 @@ func (ds *DoitServer) apiHostVarsHandler(w http.ResponseWriter, r *http.Request)
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(hv, w, r)
+		err = ds.ReturnJSON(hv, w, r)
 		if err != nil {
 			return
 		}

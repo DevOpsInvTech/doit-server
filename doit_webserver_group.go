@@ -39,7 +39,10 @@ func (ds *DoitServer) apiGroupVarHandler(w http.ResponseWriter, r *http.Request)
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(gv, w, r)
+		err = ds.ReturnJSON(gv, w, r)
+		if err != nil {
+			return
+		}
 	case "POST":
 		g, err := ds.GetGroupByName(d, reqName)
 		if err != nil {
@@ -142,7 +145,10 @@ func (ds *DoitServer) apiGroupHostHandler(w http.ResponseWriter, r *http.Request
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(gv, w, r)
+		err = ds.ReturnJSON(gv, w, r)
+		if err != nil {
+			return
+		}
 	case "POST":
 		g, err := ds.GetGroupByName(d, reqName)
 		if err != nil {
@@ -210,7 +216,10 @@ func (ds *DoitServer) apiGroupHostVarHandler(w http.ResponseWriter, r *http.Requ
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(gh, w, r)
+		err = ds.ReturnJSON(gh, w, r)
+		if err != nil {
+			return
+		}
 	case "POST":
 		g, err := ds.GetGroupByName(d, reqName)
 		if err != nil {
@@ -285,7 +294,10 @@ func (ds *DoitServer) apiGroupHostVarsHandler(w http.ResponseWriter, r *http.Req
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(gh, w, r)
+		err = ds.ReturnJSON(gh, w, r)
+		if err != nil {
+			return
+		}
 	default:
 		ds.ReturnNotImplemented(w, r)
 		return
@@ -322,7 +334,7 @@ func (ds *DoitServer) apiGroupHostsHandler(w http.ResponseWriter, r *http.Reques
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(hv, w, r)
+		err = ds.ReturnJSON(hv, w, r)
 		if err != nil {
 			return
 		}
@@ -357,7 +369,7 @@ func (ds *DoitServer) apiGroupHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(g, w, r)
+		err = ds.ReturnJSON(g, w, r)
 		if err != nil {
 			return
 		}
@@ -409,7 +421,7 @@ func (ds *DoitServer) apiGroupsHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(g, w, r)
+		err = ds.ReturnJSON(g, w, r)
 		if err != nil {
 			return
 		}

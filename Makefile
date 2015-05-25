@@ -93,3 +93,6 @@ test_api:
 	#Get all
 	curl -is -X GET http://localhost:8080/api/v1/all?domain=foo
 	@printf "\n"
+	#Get ansible groups
+	curl -is -X GET http://localhost:8080/api/v1/ansible/groups?domain=foo
+	@printf "\n"

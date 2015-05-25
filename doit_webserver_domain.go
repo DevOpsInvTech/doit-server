@@ -24,7 +24,7 @@ func (ds *DoitServer) apiDomainHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(d, w, r)
+		err = ds.ReturnJSON(d, w, r)
 		if err != nil {
 			return
 		}
@@ -70,7 +70,7 @@ func (ds *DoitServer) apiDomainsHandler(w http.ResponseWriter, r *http.Request) 
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(d, w, r)
+		err = ds.ReturnJSON(d, w, r)
 		if err != nil {
 			return
 		}

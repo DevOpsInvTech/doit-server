@@ -71,10 +71,6 @@ func (ds *DoitServer) homeHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (ds *DoitServer) ansibleHandler(w http.ResponseWriter, r *http.Request) {
-
-}
-
 func (ds *DoitServer) logger(r *http.Request, status int, retSize int) {
 	t := time.Now()
 	zone, _ := t.Zone()

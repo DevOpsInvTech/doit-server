@@ -29,7 +29,7 @@ func (ds *DoitServer) apiVarsHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(retVars, w, r)
+		err = ds.ReturnJSON(retVars, w, r)
 		if err != nil {
 			return
 		}
@@ -63,7 +63,7 @@ func (ds *DoitServer) apiVarHandler(w http.ResponseWriter, r *http.Request) {
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(v, w, r)
+		err = ds.ReturnJSON(v, w, r)
 		if err != nil {
 			return
 		}
@@ -131,7 +131,7 @@ func (ds *DoitServer) apiVarValueHandler(w http.ResponseWriter, r *http.Request)
 			ds.ReturnNotFound(w, r)
 			return
 		}
-		ds.ReturnJSON(v, w, r)
+		err = ds.ReturnJSON(v, w, r)
 		if err != nil {
 			return
 		}

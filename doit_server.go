@@ -35,6 +35,10 @@ func (ds *DoitServer) Listen(port *string, config *DoitConfig) (err error) {
 	ds.Store.InitSchema(false)
 	r := mux.NewRouter()
 
+	//ansible
+	r.HandleFunc("/api/v1/ansible/groups", ds.ansibleGroupHandler).Methods("GET")
+	r.HandleFunc("/api/v1/ansible/host/{name}", ds.ansibleGroupHandler).Methods("GET")
+
 	//APIv1 Subrouter
 	apiV1R := r.PathPrefix("/api/v1").Subrouter()
 	//All items in a domain
@@ -71,8 +75,6 @@ func (ds *DoitServer) Listen(port *string, config *DoitConfig) (err error) {
 	//home
 	r.HandleFunc("/", ds.homeHandler)
 
-	//ansible
-	r.HandleFunc("/api/ansible/domain/{name}", ds.ansibleHandler).Methods("GET")
 	//handle root requests
 	http.Handle("/", r)
 
