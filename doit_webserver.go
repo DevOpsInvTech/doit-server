@@ -55,6 +55,14 @@ func (ds *DoitServer) ReturnJSON(dStruct interface{}, w http.ResponseWriter, r *
 	return nil
 }
 
+func (ds *DoitServer) ReturnEmptyJSON(w http.ResponseWriter, r *http.Request) error {
+	data := "{}"
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(data))
+	ds.logger(r, http.StatusOK, len(data))
+	return nil
+}
+
 func (ds *DoitServer) DomainCheck(dName string) (d *dt.Domain, err error) {
 	if len(dName) > 0 {
 		var err error

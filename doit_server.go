@@ -37,7 +37,8 @@ func (ds *DoitServer) Listen(port *string, config *DoitConfig) (err error) {
 
 	//ansible
 	r.HandleFunc("/api/v1/ansible/groups", ds.ansibleGroupHandler).Methods("GET")
-	r.HandleFunc("/api/v1/ansible/host/{name}", ds.ansibleGroupHandler).Methods("GET")
+	r.HandleFunc("/api/v1/ansible/host/{name}", ds.ansibleHostHandler).Methods("GET")
+	r.HandleFunc("/api/v1/ansible/hosts", ds.ansibleHostVarsHandler).Methods("GET")
 
 	//APIv1 Subrouter
 	apiV1R := r.PathPrefix("/api/v1").Subrouter()
