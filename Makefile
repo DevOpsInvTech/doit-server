@@ -16,6 +16,9 @@ all:
 run:
 	./doit-server -c test_configs/test-config.yml -s
 
+run_profile:
+	./doit-server -cpuprofile doit.prof -memprofile doit.mprof -c test_configs/test-config.yml -s
+
 update_deps:
 	godep update github.com/DevOpsInvTech/doittypes
 	godep save

@@ -28,3 +28,7 @@ _test_tmp/*.db-journal
 
 #block if we build the server
 doit-server
+
+#prof reports
+*.prof
+*.mprof
